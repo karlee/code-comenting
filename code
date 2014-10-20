@@ -1,0 +1,30 @@
+int num = 60; //Changes the size of the circles
+//makes movment that code remembers just incase you want to right mx or my again in the code
+float mx[] = new float[num];
+float my[] = new float[num];
+
+void setup() {
+  //changes the size of image box
+  size(640, 360);
+  //turns off outlines of shape
+  noStroke();
+  //Changes the opacity of the circles
+  fill(255, 153); 
+}
+
+void draw() {
+  //changes background color
+  background(51); 
+  
+  // Cycle through the array, using a different entry on each frame. 
+  // Using modulo (%) like this is faster than moving all the values over.
+  int which = frameCount % num;
+  mx[which] = mouseX;
+  my[which] = mouseY;
+  
+  for (int i = 0; i < num; i++) {
+    // which+1 is the smallest (the oldest in the array)
+    int index = (which+1 + i) % num;
+    ellipse(mx[index], my[index], i, i);
+  }
+}
